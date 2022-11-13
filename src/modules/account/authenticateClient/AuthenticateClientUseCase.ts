@@ -4,15 +4,15 @@ import { sign } from "jsonwebtoken";
 import { prisma } from "../../../database/prismaClient";
 
 interface IAuthenticateClient {
-  name: string;
+  username: string;
   password: string;
 }
 
 export class AuthenticateClientUseCase {
-  async execute({ name, password }: IAuthenticateClient) {
+  async execute({ username, password }: IAuthenticateClient) {
     const client = await prisma.clients.findFirst({
       where: {
-        name,
+        username,
       },
     });
 
@@ -26,7 +26,7 @@ export class AuthenticateClientUseCase {
       throw new Error("Name or password invalid!");
     }
 
-    const token = sign({ name }, "cd9723fb07da1f3551efc83768cb61aa", {
+    const token = sign({ username }, "cd9723fb07da1f3551efc83768cb61aa", {
       subject: client.id,
       expiresIn: "1d",
     });

@@ -4,7 +4,8 @@ import { CreateDelveryUseCase } from "./CreateDeliveryUseCase";
 
 export class CreateDeliveryController {
   async handle(request: Request, response: Response) {
-    const { idClient, itemName } = request.body;
+    const { itemName } = request.body;
+    const { idClient } = request;
 
     const createDelveryUseCase = new CreateDelveryUseCase();
 
