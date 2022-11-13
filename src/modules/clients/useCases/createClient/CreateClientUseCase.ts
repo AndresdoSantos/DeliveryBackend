@@ -3,15 +3,15 @@ import { hash } from "bcrypt";
 import { prisma } from "../../../../database/prismaClient";
 
 interface ICreateClient {
-  name: string;
+  username: string;
   password: string;
 }
 
 export class CreateClientUseCase {
-  async execute({ password, name }: ICreateClient) {
+  async execute({ password, username }: ICreateClient) {
     const clientExist = await prisma.clients.findFirst({
       where: {
-        name: {
+        username: {
           mode: "insensitive",
         },
       },
@@ -26,7 +26,7 @@ export class CreateClientUseCase {
     const client = await prisma.clients.create({
       data: {
         password: hashPassword,
-        name,
+        username,
       },
     });
 
