@@ -4,8 +4,10 @@ export class FindAllDeliveriesUseCase {
   async execute(idClient: string) {
     const deliveries = await prisma.clients.findMany({
       where: { id: idClient },
-      include: {
+      select: {
         deliveries: true,
+        id: true,
+        username: true,
       },
     });
 
