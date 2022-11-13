@@ -33,12 +33,12 @@ model Deliveries {
   idClient String
   client   Clients @relation(fields: [idClient], references: [id])
 
-  idDeliveryman String
-  deliveryman   Deliveryman @relation(fields: [idDeliveryman], references: [id])
+  idDeliveryman String?
+  deliveryman   Deliveryman? @relation(fields: [idDeliveryman], references: [id])
 
   itemName  String
-  createdAt DateTime @default(now())
-  endAt     DateTime
+  createdAt DateTime  @default(now())
+  endAt     DateTime?
 
   @@map("deliveries")
 }
