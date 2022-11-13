@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
 
-import { prisma } from "../../../../database/prismaClient";
+import { prisma } from "../../../../../database/prismaClient";
 
 interface ICreateClient {
   username: string;
@@ -14,8 +14,6 @@ export class CreateClientUseCase {
         username,
       },
     });
-
-    console.log(clientExist);
 
     if (clientExist) {
       throw new Error("Client already exists!");

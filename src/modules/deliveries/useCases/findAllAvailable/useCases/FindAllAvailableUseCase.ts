@@ -1,9 +1,9 @@
-import { prisma } from "../../../../database/prismaClient";
+import { prisma } from "../../../../../database/prismaClient";
 
 export class FindAllAvailableUseCase {
   async execute() {
     const deliveries = await prisma.deliveries.findMany({
-      where: { endAt: null },
+      where: { endAt: null, idDeliveryman: null },
     });
 
     return deliveries;
